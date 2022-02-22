@@ -6,7 +6,22 @@ from starter.ml.data import process_data
 from starter.ml.model import inference
 
 
+app = FastAPI()
 
+rfc_model = load('model/rfc_model.joblib')
+encoder = load('model/encoder.joblib')
+lb = load('model/lb.joblib')
+
+cat_features = [
+    'workclass',
+    'education',
+    'marital_status',
+    'occupation',
+    'relationship',
+    'race',
+    'sex',
+    'native_country',
+]
 
 
 class CensusData(BaseModel):
@@ -26,8 +41,6 @@ class CensusData(BaseModel):
     native_country: str = Field(..., example='United-States')
 
 
-app = FastAPI()
-
 @app.get('/')
 async def welcome_messgage():
     return {'message': 'Welcome!!!'}
@@ -35,37 +48,7 @@ async def welcome_messgage():
 @app.post('/prediction/')
 async def predict_salary(record: CensusData):
 
-    rfc_model = load('model/rfc_model.joblib')
-    encoder = load('model/encoder.joblib')
-    lb = load('model/lb.joblib')
-
-    cat_features = [
-        'workclass',
-        'education',
-        'marital_status',
-        'occupation',
-        'relationship',
-        'race',
-        'sex',
-        'native_country',
-    ]
-
     record_dict = record.dict()
-    #     'age': [record.age],
-    #     'workclasss': [record.workclasss],
-    #     'fnlgt': [record.fnlgt],
-    #     'education': [record.education], 
-    #     'education_num': [record.education_num], 
-    #     'marital_status': [record.marital_status], 
-    #     'occupation': [record.occupation], 
-    #     'relationship': [record.relationship],
-    #     'race': [record.race],
-    #     'sex': [record.sex],
-    #     'capital_gain': [record.capital_gain],
-    #     'capital_loss': [record.capital_loss],
-    #     'hours_per_week': [record.hours_per_week],
-    #     'native_country': [record.native_country]
-    # }
 
     record_df = pd.DataFrame.from_dict([record_dict])
 
