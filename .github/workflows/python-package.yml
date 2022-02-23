@@ -42,7 +42,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
     - name: Setup DVC Action
-      uses: actions/checkout@v2
+      uses: iterative/setup-dvc@v1
     - name: Pull from DVC
       run: |
           dvc pull
