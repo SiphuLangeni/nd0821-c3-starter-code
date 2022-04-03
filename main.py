@@ -4,8 +4,8 @@ import os
 from fastapi import FastAPI
 from joblib import load
 from pydantic import BaseModel, Field
-from starter.ml.data import process_data
-from starter.ml.model import inference
+from src.data import process_data
+from src.model import inference
 
 
 if 'DYNO' in os.environ and os.path.isdir('.dvc'):
