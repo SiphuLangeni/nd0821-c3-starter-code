@@ -47,7 +47,7 @@ def preds():
 
 @pytest.fixture
 def model():
-    return load('./model/rfc_model.joblib.dvc')
+    return load('../model/rfc_model.joblib.dvc')
 
 def X():
     return np.array([1, 1, 1, 1])
