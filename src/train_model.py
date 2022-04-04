@@ -10,7 +10,7 @@ from model import train_model
 
 
 # Add code to load in the data.
-data = pd.read_csv('../data/census_clean.csv')
+data = pd.read_csv('data/census_clean.csv')
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
 train, test = train_test_split(data, test_size=0.20, random_state=42)
@@ -41,6 +41,6 @@ X_test, y_test, encoder_test, lb_test = process_data(
 
 # Train and save a model.
 model = train_model(X_train, y_train)
-dump(model, '../model/rfc_model.joblib')
-dump(encoder, '../model/encoder.joblib')
-dump(lb, '../model/lb.joblib')
+dump(model, 'model/rfc_model.joblib')
+dump(encoder, 'model/encoder.joblib')
+dump(lb, 'model/lb.joblib')
