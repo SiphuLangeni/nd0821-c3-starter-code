@@ -16,9 +16,9 @@ if 'DYNO' in os.environ and os.path.isdir('.dvc'):
     
 app = FastAPI()
 
-rfc_model = load('model/rfc_model.joblib')
-encoder = load('model/encoder.joblib')
-lb = load('model/lb.joblib')
+rfc_model = load('model/rfc_model.joblib.dvc')
+encoder = load('model/encoder.joblib.dvc')
+lb = load('model/lb.joblib.dvc')
 
 cat_features = [
     'workclass',
