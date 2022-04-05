@@ -6,11 +6,11 @@ from sklearn.model_selection import train_test_split
 from model import compute_model_metrics, inference
 
 
-rfc_model = load('../model/rfc_model.joblib')
-encoder = load('../model/encoder.joblib')
-lb = load('../model/lb.joblib')
+rfc_model = load('model/rfc_model.joblib')
+encoder = load('model/encoder.joblib')
+lb = load('model/lb.joblib')
 
-data = pd.read_csv('../data/census_clean.csv')
+data = pd.read_csv('data/census_clean.csv')
 
 train, test = train_test_split(data, test_size=0.20, random_state=42)
 
@@ -91,7 +91,7 @@ def category_slice_metrics(df, cat_features, y, preds):
     
     slice_metrics_df = pd.DataFrame.from_dict(slice_metrics_dict)
     
-    with open('../metrics/slice_output.txt', 'w') as filename:
+    with open('metrics/slice_output.txt', 'w') as filename:
         filename.write(slice_metrics_df.to_string(index=False))
 
 
