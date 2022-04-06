@@ -23,5 +23,5 @@ response = requests.post(
     json=data
 )
 
-print(response.status_code)
-print(response.json())
+print(f'Status code: {response.status_code}')
+print(f'Prediction: {response.json()}')
