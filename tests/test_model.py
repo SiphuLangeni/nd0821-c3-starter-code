@@ -6,36 +6,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from src.data import process_data
 from src.model import compute_model_metrics, inference, train_model
-# from model import rfc_model
 
-# data = pd.read_csv('../starter/data/census_clean.csv')
-# train, test = train_test_split(data, test_size=0.20, random_state=42)
-
-# cat_features = [
-#     "workclass",
-#     "education",
-#     "marital-status",
-#     "occupation",
-#     "relationship",
-#     "race",
-#     "sex",
-#     "native-country",
-# ]
-# X_train, y_train, encoder, lb = process_data(
-#     train,
-#     categorical_features=cat_features, 
-#     label="salary", 
-#     training=True
-# )
-
-# X_test, y_test, encoder_test, lb_test = process_data(
-#     test,
-#     categorical_features=cat_features,
-#     label="salary",
-#     training=False,
-#     encoder=encoder,
-#     lb=lb
-# )
 
 @pytest.fixture
 def y():
@@ -45,9 +16,9 @@ def y():
 def preds():
     return np.array([0, 0, 0, 1])
 
-# @pytest.fixture
-# def model():
-#     return load('../model/rfc_model.joblib.dvc')
+@pytest.fixture
+def model():
+    return load('model/rfc_model.joblib')
 
 def X():
     return np.array([1, 1, 1, 1])
@@ -92,11 +63,11 @@ def test_compute_model_metrics(y, preds):
     assert fbeta == 0.4
 
 
-# def test_inference(model, X_train):
+def test_inference(model, X_train):
 
-#     preds = inference(model, X_train)
+    preds = inference(model, X_train)
 
-#     assert preds is not None
+    assert preds is not None
 
 
 
