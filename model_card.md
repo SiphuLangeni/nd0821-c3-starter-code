@@ -19,12 +19,12 @@ _Please include the metrics used and your model's performance on those metrics._
 
 | Metric   |      Value     
 |----------|:-------------:|
-| precision | 0.74 |
+| precision | 0.75 |
 | recall | 0.64 |
 | f-beta | 0.69 |
 
 ## Ethical Considerations
-The dataset was donated by Ronny Kohavi and Barry Becker to the UCI Machine Learning Repository.
+The dataset was donated by Ronny Kohavi and Barry Becker to the UCI Machine Learning Repository. Site appropriately when using this dataset. Bcause this dataset includes demographic data such as gender, race, etc. some bias could be introduce if not used correctly. Be mindful of the effect this will have on your specific use case.
 
 ## Caveats and Recommendations
 - The default hyperparameters were used. For improved metrics, hyperparameter tuning is recommended.  

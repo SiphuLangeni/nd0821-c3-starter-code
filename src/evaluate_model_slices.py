@@ -1,41 +1,6 @@
 import numpy as np
 import pandas as pd
-from joblib import load
-from data import process_data
-from sklearn.model_selection import train_test_split
-from model import compute_model_metrics, inference
-
-
-rfc_model = load('model/rfc_model.joblib')
-encoder = load('model/encoder.joblib')
-lb = load('model/lb.joblib')
-
-data = pd.read_csv('data/census_clean.csv')
-
-train, test = train_test_split(data, test_size=0.20, random_state=42)
-
-cat_features = [
-    "workclass",
-    "education",
-    "marital-status",
-    "occupation",
-    "relationship",
-    "race",
-    "sex",
-    "native-country",
-]
-
-
-X_test, y_test, encoder_test, lb_test = process_data(
-    test,
-    categorical_features=cat_features,
-    label="salary",
-    training=False,
-    encoder=encoder,
-    lb=lb
-)
-
-preds = inference(rfc_model, X_test)
+from model import compute_model_metrics
 
 
 def category_slice_metrics(df, cat_features, y, preds):
@@ -93,7 +58,3 @@ def category_slice_metrics(df, cat_features, y, preds):
     
     with open('metrics/slice_output.txt', 'w') as filename:
         filename.write(slice_metrics_df.to_string(index=False))
-
-
-if __name__ == "__main__":
-    category_slice_metrics(test, cat_features, y_test, preds)

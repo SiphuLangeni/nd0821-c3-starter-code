@@ -6,7 +6,8 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 from joblib import dump
 from data import process_data
-from model import train_model
+from model import train_model, compute_model_metrics, inference
+from evaluate_model_slices import category_slice_metrics
 
 
 # Add code to load in the data.
@@ -44,3 +45,20 @@ model = train_model(X_train, y_train)
 dump(model, 'model/rfc_model.joblib')
 dump(encoder, 'model/encoder.joblib')
 dump(lb, 'model/lb.joblib')
+
+preds_test = inference(model, X_test)
+
+# Calculate and save model metrics.
+precision, recall, fbeta = compute_model_metrics(y_test, preds_test)
+metrics_dict = {
+    'precision': precision,
+    'recall': recall,
+    'fbeta': fbeta
+}
+
+with open('metrics/model_metrics.txt', 'w') as filename:
+    filename.write(str(metrics_dict))
+
+# Calculate and save model metrics for each category slice.
+category_slice_metrics(test, cat_features, y_test, preds_test)
+
